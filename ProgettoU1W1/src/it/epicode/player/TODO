@@ -1,0 +1,100 @@
+
+#REALIZZAZIONE DI UN PLAYER MULTIMEDIALE
+------------------------------------------
+
+Tipologie elementi multimediali:
+	-"Immagine"
+	- "Video"
+	- "Registrazione audio"
+	
+	(*) occorre [titolo]
+	
+	(*) se è "Riproducibile" => ha una "durata" e un metodo: play()
+	
+
+*** AUDIO: ------------------
+
+	Riproducibile
+		volume (di tipo int)
+		
+	Metodi  (interfaccia Playable)
+		alzaVolume()  &  abbassaVolume()
+		play()
+		
+	Se riprodotta:
+		ripete un n° di volte pari alla durata => 
+			stampa titolo + una sequenza di "!" di lunghezza pari al volume (1 stampa per riga)
+		
+		
+*** VIDEO: ------------------
+
+	Riproducibile
+		volume (di tipo int)
+		luminosita (di tipo int)
+		
+	Metodi (interfaccia Playable)
+		alzaVolume()  &  abbassaVolume()
+		aumentaLuminosita()  &  diminuisciLuminosita()
+		play()
+		
+	Se riprodotta:
+		ripete un n° di volte pari alla durata => 
+			stampa titolo + una sequenza di "!" di lunghezza pari al volume
+			+ una sequenza di "*" di lunghezza pari alla luminosita (1 stampa per riga)
+		
+		
+*** IMMAGINE: ------------------
+
+	Non riproducibile
+		luminosita (di tipo int)
+		
+	Metodi (interfaccia Displayable)
+		aumentaLuminosita()  &  diminuisciLuminosita()
+		show()
+		
+	Se riprodotta:
+		ripete un n° di volte pari alla durata => 
+			stampa titolo + una sequenza di "!" di lunghezza pari al volume (1 stampa per riga)
+		
+		
+
+ORGANIZZARE:
+
+	classi astratte, interfacce e classi concrete di un "lettore multimediale"
+	che memorizza "5 elementi (creati con valori letti da tastiera)" 
+	in un "array"
+	e chiede ripetutamente all'utente quale oggetto eseguire:
+		leggendo int da "1 a 5"
+		oppure 0 per finire
+
+
+
+ANALISI:
+	
+	- Creare Main (Lettore Multimediale);
+	
+	- Creare classe astratta Elemento Multimediale;
+	
+	- Creare classe Elemento Multimediale Riproducibile;
+	
+	- Creare classe Elemento Multimediale Non Riproducibile;
+	
+	- Creare classi: Audio, Video, Immagine; (extends "rispettive classi")
+	
+	- Interfacce: Riproducibile, Non Riproducibile
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
