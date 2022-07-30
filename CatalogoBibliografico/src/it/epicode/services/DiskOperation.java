@@ -2,16 +2,21 @@ package it.epicode.services;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import it.epicode.catalogo.ArchiveMain;
+import it.epicode.catalogo.Book;
 import it.epicode.catalogo.Catalog;
+import it.epicode.catalogo.Magazine;
+import it.epicode.catalogo.Periodicity;
 
 // Definizione della classe di servizio per le operazioni su disco, che implementa i metodi tramite l'interfaccia
 public class DiskOperation implements DiskOperationInterface {
@@ -20,7 +25,8 @@ public class DiskOperation implements DiskOperationInterface {
 
 	private Map<String, Catalog> mainCatalog;
 
-	// Definizione del costruttore per creare l'oggetto di servizio riguardante le operazioni su disco
+	// Definizione del costruttore per creare l'oggetto di servizio riguardante le
+	// operazioni su disco
 	public DiskOperation(Map<String, Catalog> mainCatalog) {
 
 		this.mainCatalog = mainCatalog;
@@ -37,8 +43,8 @@ public class DiskOperation implements DiskOperationInterface {
 				catalogToText += (cat.toString() + "\n");
 			}
 
-			File catalogFile = new File("./catalog.txt");
-			FileUtils.writeStringToFile(catalogFile, catalogToText, "UTF-8");
+			File catalogFile = new File("./catalog.csv");
+			FileUtils.writeStringToFile(catalogFile, catalogToText, StandardCharsets.ISO_8859_1);
 
 			Log.info("Archivio caricato correttamente");
 
@@ -49,25 +55,34 @@ public class DiskOperation implements DiskOperationInterface {
 	}
 
 	@Override
-	public List<String> loadFromDisk() throws IOException {
-		List<String> listaRead = new ArrayList<String>();
+	public Map<String, Catalog> loadFromDisk() throws IOException {
+
 		try {
-			File file = new File("./catalog.txt");
+			File file = new File("./catalog.csv");
+			List<String> lines = FileUtils.readLines(file, StandardCharsets.ISO_8859_1);
 
-			String readString = FileUtils.readFileToString(file, "UTF-8");
-			String[] catalog = readString.split(";");
+			mainCatalog = lines.stream()
+					.map(line -> line.split(";"))
+					.map(el -> {
 
-			for (String element : catalog) {
-				System.out.println(element);
-			}
+						if (el.length == 6) {
+							return new Book(el[0], el[1], el[2], Integer.parseInt(el[3]), el[4], el[5]);
+		
+						} else {
+							return new Magazine(el[0], el[1], el[2], Integer.parseInt(el[3]), Periodicity.valueOf(el[4]));
+						}
+		
+					}).collect(Collectors.toMap(c -> c.getISBNCode(), c -> c));
 
 			Log.info("La lettura dell'archivio è andata a buon fine.");
-			return listaRead;
+
+			return mainCatalog;
 
 		} catch (IOException e) {
 			Log.error("La lettura del file non è andata a buon fine!" + e);
 		}
-		return listaRead;
+
+		return mainCatalog;
 	}
 
 }

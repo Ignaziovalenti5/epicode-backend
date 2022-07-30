@@ -50,8 +50,8 @@ public class ArchiveMain {
 		// Lettura del file salvato sul disco
 		// Una riga per ogni elemento del catalogo
 		System.out.println("LETTURA DAL DISCO:\n");
-		List<String> catalogFromDisk = diskOp.loadFromDisk();
-		catalogFromDisk.forEach(System.out::println);
+		Map<String, Catalog> catalogFromDisk = diskOp.loadFromDisk();
+		catalogFromDisk.forEach((k, v) -> System.out.println(v));
 
 	}
 

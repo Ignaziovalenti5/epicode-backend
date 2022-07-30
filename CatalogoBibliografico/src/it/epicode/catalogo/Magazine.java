@@ -23,8 +23,7 @@ public class Magazine extends Catalog {
 	// Override del metodo toString()
 	@Override
 	public String toString() {
-		return "Rivista [ codice ISBN: " + iSBNCode + ", titolo: " + title + ", Anno di pubblicazione: "
-				+ publicationYear + ", N° di pagine: " + numOfPage + ", Periodicità: " + periodicity + " ]";
+		return iSBNCode + ";" + title + ";" + publicationYear + ";" + numOfPage + ";" + periodicity;
 	}
 
 }

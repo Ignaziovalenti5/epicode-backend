@@ -33,8 +33,7 @@ public class Book extends Catalog {
 	// Override del metodo toString()
 	@Override
 	public String toString() {
-		return "Libro [ codice ISBN: " + iSBNCode + ", titolo: " + title + ", Anno di pubblicazione: " + publicationYear
-				+ ", N° di pagine: " + numOfPage + ", autore: " + author + ", genere: " + genre + " ]";
+		return iSBNCode + ";" + title + ";" + publicationYear + ";" + numOfPage + ";" + author + ";" + genre;
 	}
 
 }
