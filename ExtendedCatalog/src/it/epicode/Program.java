@@ -28,33 +28,34 @@ public class Program {
 
 		serviceCatalog.removeCatalogElement("1534");
 
-		System.out.println("RICERCA PER ISBN");
 		Catalog searchElement1 = serviceCatalog.searchForIsbnCode("1234");
-		log.info("Elemento trovato: " + searchElement1);
+		log.info("RICERCA PER ISBN: " + searchElement1);
 
 		List<Catalog> searchElements2 = serviceCatalog.searchForPubblicationYear("2012");
 		for (Catalog e : searchElements2) {
-			log.info("Elemento trovato: " + e.getTitle());
+			log.info("RICERCA PER ANNO: " + e);
 		}
 
 		List<Book> searchElements3 = serviceCatalog.searchForAuthor("Autore 1");
 		for (Catalog e : searchElements3) {
-			log.info("Elemento trovato: " + e);
+			log.info("RICERCA PER AUTORE: " + e);
 		}
 
 		List<Catalog> searchElements4 = serviceCatalog.searchForTitle("Libro");
 		for (Catalog e : searchElements4) {
-			log.info("Elemento trovato: " + e);
+			log.info("RICERCA PER TITOLO: " + e);
 		}
+
+		serviceLoan.returnCatalog(3);
 
 		List<Loan> searchLoans1 = serviceLoan.searchLoansByCardNumber(3266732);
 		for (Loan l : searchLoans1) {
-			log.info("Elemento trovato: " + l);
+			log.info("RICERCA PRESTITI PER N° TESSERA: " + l);
 		}
 
 		List<Loan> searchLoans2 = serviceLoan.searchExpiredLoans();
 		for (Loan l : searchLoans2) {
-			log.info("Elemento trovato: " + l);
+			log.info("RICERCA PRESTITI SCADUTI: " + l);
 		}
 
 	}

@@ -47,6 +47,26 @@ public class LoanDAO {
 			em.close();
 		}
 	}
+	
+	public void returnCatalog(int loanId) {
+		EntityManager em = emf.createEntityManager();
+
+		try {
+			Loan l = em.find(Loan.class, loanId);
+
+			EntityTransaction trans = em.getTransaction();
+			trans.begin();
+			l.setEffectiveReturnDate(LocalDate.now());			
+			trans.commit();
+
+		} catch (Exception e) {
+			log.error("Errore", e);
+
+		} finally {
+			em.close();
+
+		}
+	}
 
 	public List<Loan> searchLoansByCardNumber(int cardNumber) {
 		EntityManager em = emf.createEntityManager();
