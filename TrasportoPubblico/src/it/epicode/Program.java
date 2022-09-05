@@ -22,9 +22,7 @@ import it.epicode.entities.TypeSeasonTicket;
 import it.epicode.entities.User;
 import it.epicode.services.Service;
 
-//	Creazione del Program in cui lanciare i metodi per:
-//	popolare il database;
-//	effettuare le ricerche tramite le @NamedQuery
+//	Creazione del Program in cui lanciare i metodi
 public class Program {
 
 	public static final Logger log = LoggerFactory.getLogger(Program.class);
@@ -201,6 +199,8 @@ public class Program {
 		testAddTravelDocument(serv);
 		testAddPath(serv);
 		testAddTravel(serv);
+
+		// test per effettuare le ricerche tramite le @NamedQuery
 		testConvalidTravelDocument(serv);
 		testSearchTicketByDay(serv);
 		testSearchTicketByPeriod(serv);
